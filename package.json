@@ -1,0 +1,25 @@
+{
+  "name": "staylive",
+  "version": "0.0.2",
+  "description": "Keeps your view of an express application live by refreshing the browser when files you specify change.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ForbesLindesay/staylive.git"
+  },
+  "keywords": [
+    "express",
+    "connect",
+    "live"
+  ],
+  "author": "Forbes Lindesay",
+  "license": "BSD",
+  "devDependencies":{
+    "mocha":"*",
+    "jshint":"*",
+    "should":"*"
+  }
+}
