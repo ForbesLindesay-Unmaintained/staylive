@@ -87,6 +87,7 @@ module.exports = function (options) {
         ];
 
         if (url === prefix + '/client.js') {
+            res.contentType('client.js');
             return res.send(client.join('\n'));
         }
         next();

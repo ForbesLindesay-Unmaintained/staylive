@@ -1,6 +1,6 @@
 {
   "name": "staylive",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Keeps your view of an express application live by refreshing the browser when files you specify change.",
   "main": "index.js",
   "scripts": {
