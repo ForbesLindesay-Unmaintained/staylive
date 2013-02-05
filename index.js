@@ -63,7 +63,7 @@ module.exports = function (parent, options) {
     for (var i = 0; i < folders.length; i++) {
         checkDirectory(folders[i]);
     }
-    for (var j = 1; j < arguments.length; j++) {
+    for (var j = 2; j < arguments.length; j++) {
         checkDirectory(arguments[j]);
     }
 
