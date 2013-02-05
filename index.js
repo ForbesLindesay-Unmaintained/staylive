@@ -1,7 +1,24 @@
-module.exports = function (options) {
-    options = options || {};
+var express = require('express');
+module.exports = function (parent, options) {
+    var app = express();
 
-    var prefix = options.prefix || '/staylive';
+    var route = '';
+  
+    app.on('mount', function () {
+        route = app.route === '/' ? '' : app.route;
+    });
+
+    var oldRender = parent.render;
+    parent.render = function (name, options, fn) {
+      var f = fn;
+      arguments[2] = function (err, res) {
+        if (err) return f.apply(this, arguments);
+        return f(err, res.replace(/( *)<\/body>/i, '$1  <script src="' + route + '/client.js"></script>\n$1</body>'));
+      };
+      oldRender.apply(this, arguments);
+    };
+
+    options = options || {};
     var folders = options.folders || [];
 
 
@@ -58,12 +75,11 @@ module.exports = function (options) {
         return !/output/g.test(file) && (!/\.js$/g.test(file) || /client/g.test(file));
     }
 
-    return function (req, res, next) {
-        prefix = prefix.replace(/(\/|\\)?$/g, '');
-        var url = require('url').parse(req.url).pathname;
-        if (url !== prefix + '/client.js' && url !== prefix + '/api') return next();
+    app.use(function (req, res, next) {
+        var url = req.path;
+        if (url !== '/client.js' && url !== '/api') return next();
 
-        if (url === prefix + '/api') {
+        if (url === '/api') {
             if (req.query.id == id.toString()) {
                 sendAll = send(res);
                 return;
@@ -86,10 +102,12 @@ module.exports = function (options) {
             '}())'
         ];
 
-        if (url === prefix + '/client.js') {
+        if (url === '/client.js') {
             res.contentType('client.js');
             return res.send(client.join('\n'));
         }
         next();
-    };
+    });
+
+    return app;
 };
