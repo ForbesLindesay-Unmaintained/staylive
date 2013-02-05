@@ -93,7 +93,7 @@ module.exports = function (parent, options) {
             'if(typeof jQuery === "undefined") throw new Error("You must install jQuery to use staylive");',
             'var old = null;',
             'function test(){setTimeout(function(){',
-            'jQuery.ajax("' + prefix  + '/api?id="+old, {success: function(data){',
+            'jQuery.ajax("' + route  + '/api?id="+old, {success: function(data){',
             'if(old === null) old = data;',
             'else if (old !== data) location.reload();',
             '}, }).always(test);},10);',
