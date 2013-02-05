@@ -1,6 +1,6 @@
 {
   "name": "staylive",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Keeps your view of an express application live by refreshing the browser when files you specify change.",
   "main": "index.js",
   "scripts": {
@@ -17,9 +17,9 @@
   ],
   "author": "Forbes Lindesay",
   "license": "BSD",
-  "devDependencies":{
-    "mocha":"*",
-    "jshint":"*",
-    "should":"*"
+  "devDependencies": {
+    "mocha": "*",
+    "jshint": "*",
+    "should": "*"
   }
 }
